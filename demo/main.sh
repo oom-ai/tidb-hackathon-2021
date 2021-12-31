@@ -8,13 +8,14 @@ SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) && cd "$SDIR" || exit 1
 export OOMCLI_CONFIG="$SDIR/oomcli.yaml"
 
 RECIPE=fraud_detection.yaml
-ID_START=1000
-ID_END=1099
+ID_START=1001
+ID_END=2000
 ID_RANGE=$ID_START..$ID_END
 TIME_RANGE_START=$(perl -MTime::Piece -MTime::Seconds -le 'print((Time::Piece->new + ONE_DAY)->ymd)')
 TIME_RANGE_END=$(perl -MTime::Piece -MTime::Seconds -le 'print((Time::Piece->new + ONE_DAY * 2)->ymd)')
 TIME_RANGE=$TIME_RANGE_START..$TIME_RANGE_END
-LABEL_LIMIT=100
+LABEL_LIMIT=5000
+readarray -t PRED_SAMPLE < <(seq $ID_START $ID_END | shuf | head -20)
 
 info "generate fake group data..."
 ffgen group account \
@@ -68,10 +69,9 @@ oomcli join \
 tangram train --file fraud_detection_train.csv --target is_fraud --output fraud_detection.tangram
 
 info "model serving and online feature get..."
-
-for ((key = ID_START; key <= ID_END; key++)); do
-oomcli get online \
-  --entity-key "$key" \
-  --feature account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d \
-  --output csv | tail -n +$((key != ID_START))
+for key in "${PRED_SAMPLE[@]}"; do
+    oomcli get online \
+      --entity-key "$key" \
+      --feature account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d \
+      --output csv | tail -n +$((key != ID_START))
 done | tangram predict --model fraud_detection.tangram > pred.csv
