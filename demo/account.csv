@@ -1,0 +1,102 @@
+user,state,credit_score,account_age_days,has_2fa_installed
+1000,Wyoming,558,557,false
+1001,Wyoming,660,566,true
+1002,Pennsylvania,574,537,false
+1003,Delaware,617,433,false
+1004,Maine,687,75,false
+1005,Alaska,637,41,false
+1006,Louisiana,672,821,false
+1007,Mississippi,720,269,false
+1008,Montana,689,799,false
+1009,Wisconsin,667,803,true
+1010,New Jersey,581,232,false
+1011,Indiana,538,330,false
+1012,North Carolina,549,813,false
+1013,Pennsylvania,607,492,false
+1014,Wisconsin,549,1030,false
+1015,West Virginia,710,857,false
+1016,Kentucky,741,923,true
+1017,Tennessee,700,421,false
+1018,North Dakota,570,519,false
+1019,Minnesota,512,791,false
+1020,Georgia,715,180,true
+1021,Wisconsin,685,74,false
+1022,West Virginia,700,268,false
+1023,Massachusetts,579,973,true
+1024,Ohio,749,603,false
+1025,Arkansas,655,838,false
+1026,Illinois,521,564,false
+1027,Georgia,638,210,false
+1028,Nevada,583,637,false
+1029,Idaho,515,975,false
+1030,North Carolina,536,99,false
+1031,Delaware,648,531,true
+1032,Delaware,716,605,true
+1033,Connecticut,506,656,false
+1034,Delaware,616,158,true
+1035,Wisconsin,519,61,false
+1036,Utah,616,742,true
+1037,Montana,656,688,false
+1038,North Dakota,713,338,true
+1039,Wisconsin,696,480,true
+1040,Nevada,682,981,false
+1041,Maine,687,930,false
+1042,Rhode Island,578,943,false
+1043,Michigan,663,890,false
+1044,Oregon,715,1064,false
+1045,Florida,651,1079,false
+1046,Vermont,636,939,false
+1047,Wyoming,615,419,false
+1048,California,714,19,false
+1049,California,666,472,false
+1050,Connecticut,604,214,true
+1051,Oregon,638,209,false
+1052,Oklahoma,730,984,false
+1053,Colorado,688,508,false
+1054,South Carolina,663,677,false
+1055,Louisiana,658,262,true
+1056,Texas,585,1000,false
+1057,Nebraska,632,1027,false
+1058,Illinois,538,281,false
+1059,Vermont,565,144,false
+1060,Washington,639,348,false
+1061,Wisconsin,517,327,false
+1062,Washington,612,879,false
+1063,Washington,546,270,false
+1064,North Carolina,737,66,true
+1065,Wyoming,567,119,false
+1066,Massachusetts,739,362,false
+1067,New Hampshire,663,220,false
+1068,Missouri,563,161,true
+1069,North Carolina,641,74,true
+1070,Vermont,521,578,true
+1071,Kansas,587,85,true
+1072,Maine,543,1095,true
+1073,New Mexico,730,790,true
+1074,Tennessee,524,699,true
+1075,Texas,699,825,true
+1076,Hawaii,572,602,true
+1077,Tennessee,586,607,true
+1078,Alabama,722,230,false
+1079,Rhode Island,665,747,false
+1080,New Mexico,663,590,true
+1081,Vermont,667,244,false
+1082,New Jersey,632,175,false
+1083,New Mexico,513,48,false
+1084,Texas,628,410,false
+1085,Montana,745,897,false
+1086,Montana,575,566,false
+1087,North Carolina,653,141,true
+1088,Maryland,740,941,false
+1089,New Mexico,588,528,false
+1090,Pennsylvania,674,189,false
+1091,New Jersey,697,416,true
+1092,Minnesota,646,1092,true
+1093,Vermont,644,441,false
+1094,Idaho,561,73,false
+1095,Georgia,705,725,false
+1096,Arizona,722,149,false
+1097,Montana,744,149,false
+1098,Wisconsin,568,222,false
+1099,North Carolina,712,451,true
+1100,Pennsylvania,670,16,true

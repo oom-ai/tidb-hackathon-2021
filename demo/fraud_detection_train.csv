@@ -1,0 +1,101 @@
+is_fraud,account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d
+false,Minnesota,512,791,false,1,44
+false,Wisconsin,549,1030,false,6,25
+false,Delaware,716,605,true,2,77
+false,Rhode Island,578,943,false,14,70
+true,Delaware,648,531,true,14,34
+false,Tennessee,700,421,false,7,47
+false,Florida,651,1079,false,12,43
+false,Pennsylvania,674,189,false,5,22
+false,Delaware,617,433,false,5,39
+true,Illinois,521,564,false,2,41
+true,North Carolina,712,451,true,7,78
+false,New Jersey,632,175,false,11,14
+false,Wisconsin,568,222,false,3,25
+false,Wisconsin,696,480,true,3,65
+true,California,714,19,false,13,59
+true,Michigan,663,890,false,4,30
+false,Montana,575,566,false,13,30
+false,Delaware,616,158,true,4,53
+false,Missouri,563,161,true,1,51
+false,Kansas,587,85,true,2,78
+false,Utah,616,742,true,5,28
+true,Hawaii,572,602,true,3,27
+false,Rhode Island,578,943,false,14,70
+false,Wisconsin,549,1030,false,6,25
+true,Minnesota,512,791,false,1,44
+true,New Mexico,730,790,true,0,35
+false,Maine,543,1095,true,6,59
+false,Texas,699,825,true,9,43
+false,New Jersey,581,232,false,12,69
+false,Montana,656,688,false,12,62
+false,New Jersey,632,175,false,11,14
+false,Idaho,561,73,false,4,53
+false,North Carolina,641,74,true,2,71
+true,Connecticut,604,214,true,6,14
+false,California,714,19,false,13,59
+true,Maine,687,75,false,11,40
+false,New Jersey,581,232,false,12,69
+false,Massachusetts,579,973,true,13,64
+false,Mississippi,720,269,false,10,45
+false,New Jersey,697,416,true,9,16
+false,Maryland,740,941,false,12,20
+true,Oregon,638,209,false,13,51
+false,Washington,612,879,false,5,72
+false,Oregon,638,209,false,13,51
+false,Wyoming,558,557,false,14,22
+true,Michigan,663,890,false,4,30
+false,Maine,687,75,false,11,40
+false,Maryland,740,941,false,12,20
+false,New Hampshire,663,220,false,4,56
+false,North Carolina,549,813,false,3,42
+false,Alaska,637,41,false,2,61
+false,Pennsylvania,607,492,false,3,22
+true,Wisconsin,685,74,false,3,77
+false,Texas,699,825,true,9,43
+true,Michigan,663,890,false,4,30
+false,Hawaii,572,602,true,3,27
+false,Wisconsin,519,61,false,7,50
+false,Arkansas,655,838,false,2,38
+false,Montana,656,688,false,12,62
+false,Massachusetts,739,362,false,11,76
+false,Delaware,616,158,true,4,53
+false,Wyoming,615,419,false,5,40
+false,Montana,745,897,false,10,15
+false,Georgia,705,725,false,2,22
+false,New Mexico,730,790,true,0,35
+false,North Carolina,737,66,true,11,64
+false,Oregon,638,209,false,13,51
+true,Alabama,722,230,false,14,68
+false,Rhode Island,665,747,false,10,22
+false,Connecticut,604,214,true,6,14
+true,Maryland,740,941,false,12,20
+false,Hawaii,572,602,true,3,27
+false,Washington,639,348,false,10,40
+false,West Virginia,700,268,false,6,29
+false,Utah,616,742,true,5,28
+false,Pennsylvania,674,189,false,5,22
+false,Wisconsin,549,1030,false,6,25
+false,Connecticut,604,214,true,6,14
+false,Illinois,538,281,false,3,64
+true,Connecticut,506,656,false,6,32
+false,New Jersey,581,232,false,12,69
+true,Wisconsin,667,803,true,11,20
+true,California,714,19,false,13,59
+false,Texas,628,410,false,2,76
+false,Montana,689,799,false,11,64
+true,Georgia,638,210,false,0,33
+false,Montana,575,566,false,13,30
+false,New Jersey,697,416,true,9,16
+true,North Carolina,549,813,false,3,42
+false,Illinois,538,281,false,3,64
+true,Alabama,722,230,false,14,68
+false,Michigan,663,890,false,4,30
+false,North Carolina,712,451,true,7,78
+false,Kansas,587,85,true,2,78
+false,Tennessee,524,699,true,13,66
+false,California,666,472,false,0,15
+false,Wisconsin,568,222,false,3,25
+false,Vermont,521,578,true,8,42
+false,North Carolina,641,74,true,2,71
+false,California,714,19,false,13,59

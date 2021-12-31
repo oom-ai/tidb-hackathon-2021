@@ -1,0 +1,43 @@
+entity:
+  name: user
+  description: 'user entity'
+groups:
+  - name: account
+    description: 'user account info'
+    features:
+      - name: state
+        rand_gen:
+          type: state
+      - name: credit_score
+        rand_gen:
+          type: int
+          start: 500
+          end: 750
+      - name: account_age_days
+        rand_gen:
+          type: int
+          start: 1
+          end: 1095
+      - name: has_2fa_installed
+        rand_gen:
+          type: bool
+          prob: 0.3
+  - name: transaction_stats
+    description: 'user transaction statistics'
+    features:
+      - name: transaction_count_7d
+        rand_gen:
+          type: int
+          start: 0
+          end: 14
+      - name: transaction_count_30d
+        rand_gen:
+          type: int
+          start: 14
+          end: 80
+  - name: target
+    features:
+      - name: is_fraud
+        rand_gen:
+          type: bool
+          prob: 0.2
