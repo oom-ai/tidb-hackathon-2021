@@ -1,11 +1,23 @@
 online-store:
-  sqlite:
-    db-file: oomstore.db
+  mysql:
+    host: 127.0.0.1
+    port: 23306
+    user: oomplay
+    password: oomplay
+    database: oomplay
 
 offline-store:
-  sqlite:
-    db-file: oomstore.db
+  mysql:
+    host: 127.0.0.1
+    port: 23306
+    user: oomplay
+    password: oomplay
+    database: oomplay
 
 metadata-store:
-  sqlite:
-    db-file: oomstore.db
+  mysql:
+    host: 127.0.0.1
+    port: 23306
+    user: oomplay
+    password: oomplay
+    database: oomplay
