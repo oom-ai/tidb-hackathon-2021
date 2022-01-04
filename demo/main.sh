@@ -1,26 +1,64 @@
-# generate fake data
+#!/usr/bin/env bash
+set -eu
+IFS=$'\n\t'
 
-ffgen group account -I 1000..1099 -r fraud_detection.yaml > account.csv
-ffgen group transaction_stats -I 1000..1099 -r fraud_detection.yaml > transaction_stats.csv
-ffgen label target -r fraud_detection.yaml -I 1000..1099 -l 100 -T $(date -v +1d +'%Y-%m-%d')..$(date -v +2d +'%Y-%m-%d') > label.csv
+info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
 
-# populate oomstore with generated data
+SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) && cd "$SDIR" || exit 1
+export OOMCLI_CONFIG="$SDIR/oomcli.yaml"
 
-rm /tmp/oomstore.db
+RECIPE=fraud_detection.yaml
+ID_START=1001
+ID_END=2000
+ID_RANGE=$ID_START..$ID_END
+TIME_RANGE_START=$(perl -MTime::Piece -MTime::Seconds -le 'print((Time::Piece->new + ONE_DAY)->ymd)')
+TIME_RANGE_END=$(perl -MTime::Piece -MTime::Seconds -le 'print((Time::Piece->new + ONE_DAY * 2)->ymd)')
+TIME_RANGE=$TIME_RANGE_START..$TIME_RANGE_END
+LABEL_LIMIT=5000
+# shellcheck disable=SC2207
+PRED_SAMPLE=($(seq $ID_START $ID_END | sort -R | head -20))
+
+info "generate fake group data..."
+ffgen group account \
+    --seed 0 \
+    --recipe $RECIPE \
+    --id-range $ID_RANGE \
+    > account.csv
+ffgen group transaction_stats \
+    --seed 0 \
+    --recipe $RECIPE \
+    --id-range $ID_RANGE \
+    > transaction_stats.csv
+
+info "generate fake label data..."
+ffgen label target \
+    --seed 0 \
+    --recipe $RECIPE \
+    --id-range $ID_RANGE \
+    --time-range "$TIME_RANGE" \
+    --limit "$LABEL_LIMIT" > label.csv
+
+info "generate oomstore schema..."
+ffgen schema --recipe $RECIPE > oomstore.yaml
+
+info "populate oomstore with generated data..."
+rm -f oomstore.db
 oomcli init
-oomcli apply -f config.yml
+oomcli apply -f oomstore.yaml
+
 r1=$(oomcli import \
   --group account \
   --input-file account.csv \
   --description 'sample account data' | grep -o '[0-9]\+')
-oomcli sync -r $r1
+oomcli sync -r "$r1"
+
 r2=$(oomcli import \
   --group transaction_stats \
   --input-file transaction_stats.csv \
   --description 'sample transaction stat data' | grep -o '[0-9]\+')
-oomcli sync -r $r2
+oomcli sync -r "$r2"
 
-# model training and offline feature point-in-time join
+info "model training and offline feature point-in-time join..."
 
 oomcli join \
   --feature account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d \
@@ -31,16 +69,10 @@ oomcli join \
 
 tangram train --file fraud_detection_train.csv --target is_fraud --output fraud_detection.tangram
 
-# model serving and online feature get
-
-(
-echo "user,account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d"
-for i in {1000..1099}
-do
-oomcli get online \
-  --entity-key $i \
-  --feature account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d \
-  --output csv \
-  | sed -n '2 p'
-done
-) | tangram predict --model fraud_detection.tangram > pred.csv
+info "model serving and online feature get..."
+for key in "${PRED_SAMPLE[@]}"; do
+    oomcli get online \
+      --entity-key "$key" \
+      --feature account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d \
+      --output csv | if (( key == ID_START )); then tail -2; else tail -1; fi
+done | tangram predict --model fraud_detection.tangram > pred.csv

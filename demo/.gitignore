@@ -1,1 +1,4 @@
 *.tangram
+*.csv
+*.db
+oomstore.yaml

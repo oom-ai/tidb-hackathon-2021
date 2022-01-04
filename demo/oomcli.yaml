@@ -1,0 +1,11 @@
+online-store:
+  sqlite:
+    db-file: oomstore.db
+
+offline-store:
+  sqlite:
+    db-file: oomstore.db
+
+metadata-store:
+  sqlite:
+    db-file: oomstore.db
