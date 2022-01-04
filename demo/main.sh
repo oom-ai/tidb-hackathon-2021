@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eu
 IFS=$'\n\t'
 
 info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
@@ -15,7 +15,8 @@ TIME_RANGE_START=$(perl -MTime::Piece -MTime::Seconds -le 'print((Time::Piece->n
 TIME_RANGE_END=$(perl -MTime::Piece -MTime::Seconds -le 'print((Time::Piece->new + ONE_DAY * 2)->ymd)')
 TIME_RANGE=$TIME_RANGE_START..$TIME_RANGE_END
 LABEL_LIMIT=5000
-readarray -t PRED_SAMPLE < <(seq $ID_START $ID_END | shuf | head -20)
+# shellcheck disable=SC2207
+PRED_SAMPLE=($(seq $ID_START $ID_END | sort -R | head -20))
 
 info "generate fake group data..."
 ffgen group account \
@@ -73,5 +74,5 @@ for key in "${PRED_SAMPLE[@]}"; do
     oomcli get online \
       --entity-key "$key" \
       --feature account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d \
-      --output csv | tail -n +$((key != ID_START))
+      --output csv | if (( key == ID_START )); then tail -2; else tail -1; fi
 done | tangram predict --model fraud_detection.tangram > pred.csv
