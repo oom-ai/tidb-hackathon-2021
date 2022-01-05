@@ -39,23 +39,33 @@ ffgen label target \
     --limit "$LABEL_LIMIT" > label.csv
 
 info "generate oomstore schema..."
-ffgen schema --recipe $RECIPE > oomstore.yaml
+# uncomment this until oomplay is fixed
+# currently entity length is limited to 2
+# ffgen schema --recipe $RECIPE > oomstore.yaml
+
+info "initialize oomstore..."
+rm -f oomstore.db
+
+# give it 5 times to try
+for _i in {1..5}; do
+    oomcli init && break
+    sleep 2
+done
+
+oomcli apply -f oomstore.yaml
 
 info "populate oomstore with generated data..."
-rm -f oomstore.db
-oomcli init
-oomcli apply -f oomstore.yaml
 
 r1=$(oomcli import \
   --group account \
   --input-file account.csv \
-  --description 'sample account data' | grep -o '[0-9]\+')
+  --description 'sample account data' | grep -o 'RevisionID: [0-9]\+' | awk -F" " '{print $2}')
 oomcli sync -r "$r1"
 
 r2=$(oomcli import \
   --group transaction_stats \
   --input-file transaction_stats.csv \
-  --description 'sample transaction stat data' | grep -o '[0-9]\+')
+  --description 'sample transaction stat data' | grep -o 'RevisionID: [0-9]\+' | awk -F" " '{print $2}')
 oomcli sync -r "$r2"
 
 info "model training and offline feature point-in-time join..."
