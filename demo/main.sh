@@ -44,7 +44,8 @@ info "generate oomstore schema..."
 # ffgen schema --recipe $RECIPE > oomstore.yaml
 
 info "initialize oomstore..."
-oomplay init tidb
+oomplay init tidbext
+oomplay init tikvext
 
 # give it 5 times to try
 for _i in {1..5}; do
