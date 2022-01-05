@@ -1,23 +1,23 @@
 online-store:
-  mysql:
+  tidb:
     host: 127.0.0.1
-    port: 23306
+    port: 24000
     user: oomplay
     password: oomplay
     database: oomplay
 
 offline-store:
-  mysql:
+  tidb:
     host: 127.0.0.1
-    port: 23306
+    port: 24000
     user: oomplay
     password: oomplay
     database: oomplay
 
 metadata-store:
-  mysql:
+  tidb:
     host: 127.0.0.1
-    port: 23306
+    port: 24000
     user: oomplay
     password: oomplay
     database: oomplay
