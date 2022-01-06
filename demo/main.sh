@@ -44,8 +44,7 @@ info "generate oomstore schema..."
 # ffgen schema --recipe $RECIPE > oomstore.yaml
 
 info "initialize oomstore..."
-oomplay init tidbext
-oomplay init tikvext
+oomplay init tidbext tikvext
 
 # give it 5 times to try
 for _i in {1..5}; do
@@ -69,8 +68,7 @@ r2=$(oomcli import \
   --description 'sample transaction stat data' | grep -o 'RevisionID: [0-9]\+' | awk -F" " '{print $2}')
 oomcli sync -r "$r2"
 
-info "model training and offline feature point-in-time join..."
-
+info "point-in-time join on offline store..."
 oomcli join \
   --feature account.state,account.credit_score,account.account_age_days,account.has_2fa_installed,transaction_stats.transaction_count_7d,transaction_stats.transaction_count_30d \
   --input-file label.csv \
@@ -78,9 +76,10 @@ oomcli join \
   | cut -d',' -f3- \
   > fraud_detection_train.csv
 
+info "train the model..."
 tangram train --file fraud_detection_train.csv --target is_fraud --output fraud_detection.tangram
 
-info "model serving and online feature get..."
+info "get by key from online store and make prediction from the model..."
 for key in "${PRED_SAMPLE[@]}"; do
     oomcli get online \
       --entity-key "$key" \
