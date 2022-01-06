@@ -39,9 +39,7 @@ ffgen label target \
     --limit "$LABEL_LIMIT" > label.csv
 
 info "generate oomstore schema..."
-# uncomment this until oomplay is fixed
-# currently entity length is limited to 2
-# ffgen schema --recipe $RECIPE > oomstore.yaml
+ffgen schema --recipe $RECIPE > oomstore.yaml
 
 info "initialize oomstore..."
 oomplay init tidbext tikvext
