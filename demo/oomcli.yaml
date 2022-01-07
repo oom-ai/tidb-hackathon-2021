@@ -1,19 +1,19 @@
 online-store:
   tikv:
-    pd-addrs: ['192.168.24.180:2379']
+    pd-addrs: ['127.0.0.1:22379']
 
 offline-store:
   tidb:
-    host: 192.168.24.180
-    port: 4000
+    host: 127.0.0.1
+    port: 24000
     user: oomplay
     password: oomplay
     database: oomplay
 
 metadata-store:
   tidb:
-    host: 192.168.24.180
-    port: 4000
+    host: 127.0.0.1
+    port: 24000
     user: oomplay
     password: oomplay
     database: oomplay

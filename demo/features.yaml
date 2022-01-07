@@ -1,0 +1,24 @@
+kind: Entity
+name: user
+description: user entity
+groups:
+  - name: account
+    category: batch
+    description: user account info
+    features:
+      - name: state
+        value-type: string
+      - name: credit_score
+        value-type: int64
+      - name: account_age_days
+        value-type: int64
+      - name: 2fa_installed
+        value-type: bool
+  - name: txn_stats
+    category: batch
+    description: user transaction statistics
+    features:
+      - name: count_7d
+        value-type: int64
+      - name: count_30d
+        value-type: int64
