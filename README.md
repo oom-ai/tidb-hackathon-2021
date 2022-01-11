@@ -5,7 +5,6 @@ By [jinghancc](https://github.com/jinghancc),
 [wfxr](https://github.com/wfxr), 
 [yiksanchan](https://github.com/yiksanchan)
 
-Find English version [here](./README.EN.md).
 ## 概述
 
 OOM 特征平台为机器学习模型的训练和服务提供便捷可靠的特征支持，让用户以最小的代价落地机器学习。
